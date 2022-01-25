@@ -1,14 +1,30 @@
+import Decimal from 'decimal.js';
+import {get} from 'lodash'
 
-const terra = new Terra.LCDClient({
+const terra = new window.Terra.LCDClient({
     URL: 'https://lcd.terra.dev',
     chainID: 'columbus-5'
 });
 
+const convertToDecimal = (input) => {
+    const decimal = new Decimal(input)
+    
+    
+    return decimal.div(10000000).toString()
+}
+
 const getAccountInfo = async (address) => {
 
-    const balance = await terra.bank.balance(address)
+    const accountInfo = {}
 
-    console.log(balance)
+    const balanceInfo = await terra.bank.balance(address)
+
+
+    const coins = Object.values(get(balanceInfo,'[0]._coins',[])).map(value => ({symbol:value.denom, amount: convertToDecimal(value.amount)  }))
+
+    accountInfo.coins = coins
+
+    return accountInfo
 
 
 
