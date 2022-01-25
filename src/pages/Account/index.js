@@ -1,17 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { getAccountInfo } from '../utils/terra'
+import { getAccountInfo } from '../../utils/terra'
+import AddressPanel from './AddressPanel'
+import CoinsPanel from './CoinsPanel'
 import { AccountPageContainer, AccountInfoContainer } from './styles'
+import TransactionsPanel from './TransactionsPanel'
 
 function Account() {
   const { address } = useParams()
-  const [account, setAccount] = useState(false)
+  const [account, setAccount] = useState({ coins: [], txs: [] })
 
   console.log(account)
 
   useEffect(() => {
     getAccount()
-  }, [account])
+  }, [])
 
   const getAccount = async () => {
     const accountInfo = await getAccountInfo(address)
@@ -20,7 +23,11 @@ function Account() {
 
   return (
     <AccountPageContainer>
-      <AccountInfoContainer></AccountInfoContainer>
+      <AccountInfoContainer>
+        <AddressPanel address={address}></AddressPanel>
+        <CoinsPanel coins={account.coins}></CoinsPanel>
+        <TransactionsPanel txs={account.txs}></TransactionsPanel>
+      </AccountInfoContainer>
     </AccountPageContainer>
   )
 }
