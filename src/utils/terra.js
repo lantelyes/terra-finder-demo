@@ -17,13 +17,15 @@ const getPriceInUsd = async (coin) => {
   return get(result, 'amount', 0)
 }
 
-// Im assuming that all coins have 6 decimal places here, this may not be correct, but given the time contraints, I would rather focus on other functionality
+// Im assuming that all coins have 6 decimal places here
+// this is probably not correct, but given the time contraints, I would rather focus on other functionality
 const convertToHumanReadableNumber = (input) => {
   const decimal = new Decimal(input)
 
   return decimal.div(1000000).toString()
 }
 
+// This only gets 100 transactions, I did not have time to implement pagination
 const getTxsForAccount = async (address) => {
   // This should probably use the terra.js library, but for some reason it keeps throwing errors. This is the endpoint used by terra finder
   const txs = await axios.get(
