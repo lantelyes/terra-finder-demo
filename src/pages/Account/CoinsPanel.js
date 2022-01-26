@@ -25,9 +25,9 @@ const CoinsPanel = ({ coins }) => (
           {coins.map((coin) => {
             const parsedCoin = coin
             return (
-              <tr>
+              <tr key={parsedCoin.denom}>
                 <td className="d-flex align-items-center ml-3">
-                  {parsedCoin.denom}
+                  {parsedCoin.denom.toUpperCase()}
                 </td>
                 <td>{convertToHumanReadableNumber(parsedCoin.amount)}</td>
                 <td>

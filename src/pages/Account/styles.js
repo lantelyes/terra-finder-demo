@@ -7,13 +7,12 @@ const AccountPageContainer = styled.div`
   justify-content: center;
   align-items: center;
   padding: 20px;
+  margin-top: 40px;
 `
 
 const AccountInfoContainer = styled.div`
   width: 1200px;
-  border 1px solid black;
-  border-radius 5px;
-  min-height: 1600px
+  min-height: 1600px;
 `
 
 const LoadingContainer = styled.div`

@@ -25,14 +25,14 @@ const TransactionsPanel = ({ txs }) => (
         </thead>
         <tbody>
           {txs.map((tx) => (
-            <tr>
+            <tr key={tx.txhash}>
               <td>{tx.txhash}</td>
-              <td>{tx.tx.type}</td>
+              <td>{tx.tx.value.msg[0].type.split('/')[1]}</td>
               <td>{tx.height}</td>
               <td>{tx.timestamp}</td>
               <td>
                 {convertToHumanReadableNumber(tx.tx.value.fee.amount[0].amount)}{' '}
-                LUNA
+                {tx.tx.value.fee.amount[0].denom.toUpperCase()}
               </td>
             </tr>
           ))}

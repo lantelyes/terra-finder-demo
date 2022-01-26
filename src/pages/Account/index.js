@@ -10,8 +10,6 @@ function Account() {
   const { address } = useParams()
   const [account, setAccount] = useState({ coins: [], txs: [] })
 
-  console.log(account)
-
   useEffect(() => {
     getAccount()
   }, [])
@@ -25,7 +23,9 @@ function Account() {
     <AccountPageContainer>
       <AccountInfoContainer>
         <AddressPanel address={address}></AddressPanel>
+        <br />
         <CoinsPanel coins={account.coins}></CoinsPanel>
+        <br />
         <TransactionsPanel txs={account.txs}></TransactionsPanel>
       </AccountInfoContainer>
     </AccountPageContainer>
